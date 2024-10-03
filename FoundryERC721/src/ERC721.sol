@@ -23,9 +23,21 @@ contract ERC721 {
     // token id => token uri
     mapping(uint256 => string) _tokenUris;
 
-    event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);
-    event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);
-    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);
+    event Transfer(
+        address indexed _from,
+        address indexed _to,
+        uint256 indexed _tokenId
+    );
+    event Approval(
+        address indexed _owner,
+        address indexed _approved,
+        uint256 indexed _tokenId
+    );
+    event ApprovalForAll(
+        address indexed _owner,
+        address indexed _operator,
+        bool _approved
+    );
 
     constructor(string memory _name, string memory _symbol, address _owner) {
         name = _name;
@@ -34,12 +46,12 @@ contract ERC721 {
         contractOwner = _owner;
     }
 
-    function balanceOf(address _owner) public view returns(uint256) {
+    function balanceOf(address _owner) public view returns (uint256) {
         require(_owner != address(0), "!Add0");
         return _balances[_owner];
     }
 
-    function ownerOf(uint256 _tokenId) public view returns(address) {
+    function ownerOf(uint256 _tokenId) public view returns (address) {
         return _owners[_tokenId];
     }
 
@@ -68,11 +80,24 @@ contract ERC721 {
         emit Transfer(_from, _to, _tokenId);
     }
 
-    function tokenURI(uint256 _tokenId) public view returns(string memory) {
+    function approve(address _approved, uint256 _tokenId) public {
+        address owner = ownerOf(_tokenId);
+        require(msg.sender == owner, "!Auth");
+
+        _tokenApprovals[_tokenId] = _approved;
+        emit Approval(owner, _approved, _tokenId);
+    }
+
+    function setApprovalForAll(address _operator, bool _approved) public {
+        _operatorApprovals[msg.sender][_operator] = _approved;
+        emit ApprovalForAll(msg.sender, _operator, _approved);
+    }
+
+    function tokenURI(uint256 _tokenId) public view returns (string memory) {
         return _tokenUris[_tokenId];
     }
 
-    function totalSupply() public view returns(uint256) {
+    function totalSupply() public view returns (uint256) {
         return nextTokenIdToMint;
     }
 }
