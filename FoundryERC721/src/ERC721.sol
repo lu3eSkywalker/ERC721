@@ -179,4 +179,43 @@ contract ERC721 {
 
         emit EscrowCompleted(msg.sender, _tokenId);
     }
+
+
+    // Escrow for trade between unknown parties
+    // Create an escrow agreement (no predefined recipient)
+    function createEscrowForUnknownParties(uint256 _tokenId, uint256 _price) public {
+        require(ownerOf(_tokenId) == msg.sender, "!Auth");
+        require(_price > 0, "!Price");
+
+        // Transfer token to contract for escrow
+        _transfer(msg.sender, address(this), _tokenId);
+
+        // Set up escrow with no predefined recipient
+        escrows[_tokenId] = Escrow({
+            escrower: msg.sender,
+            recipient: address(0), // No recipient set yet
+            price: _price,
+            isActive: true
+        });
+
+        emit EscrowCreated(msg.sender, address(0), _tokenId, _price); // Emit with recipient as zero address
+    }
+
+    // Complete escrow (anyone who pays the correct price can claim the token)
+    function completeEscrowForUnknownParties(uint256 _tokenId) public payable {
+        Escrow memory escrow = escrows[_tokenId];
+        require(escrow.isActive, "!Active");
+        require(msg.value == escrow.price, "!Price");
+
+        // Transfer payment to escrower
+        payable(escrow.escrower).transfer(msg.value);
+
+        // Transfer token to the sender who completes the payment
+        _transfer(address(this), msg.sender, _tokenId);
+
+        // Mark escrow as inactive
+        escrows[_tokenId].isActive = false;
+
+        emit EscrowCompleted(msg.sender, _tokenId); // Emit with the actual recipient
+    }
 }
