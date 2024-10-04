@@ -39,13 +39,6 @@ contract ERC721 {
         bool _approved
     );
 
-    event EscrowCreated(
-        address indexed _escrower,
-        address indexed _recipient,
-        uint256 indexed _tokenId,
-        uint256 price
-    );
-
     constructor(string memory _name, string memory _symbol, address _owner) {
         name = _name;
         symbol = _symbol;
