@@ -11,6 +11,7 @@ const MintingNFTs = () => {
   );
 
   const [nftURI, setNFTURI] = useState<string>("");
+  const [nftMintResponse, setNFTMintResponse] = useState<string>("");
 
   const ABI = ["function mintTo(address, string) public"];
 
@@ -26,12 +27,20 @@ const MintingNFTs = () => {
           addressToMintNFTto,
           nftURI
         );
-        const response = createContract.toString();
+
+        const response = await createContract.wait();
         console.log(response);
+
+        if(response.status === 1) {
+          setNFTMintResponse("NFT minted Successfully")
+        } else {
+          setNFTMintResponse("Error Minting NFTs")
+        }
+
       } catch (error: any) {
-        console.error("Error launching token:", error);
+        console.error("Error Minting NFTs:", error);
         alert(
-          "An error occurred while launching the token. Check console for details."
+          "An error occurred while Minting the NFTs. Check console for details."
         );
       }
     } else {
@@ -41,33 +50,60 @@ const MintingNFTs = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center h-screen bg-gray-100">
-        <div className="bg-white shadow-md rounded-lg p-8 w-80">
-          <input
-            type="text"
-            placeholder="address of ERC721 contract"
-            onChange={(e) => setNFTAddress(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+      <div className="bg-gray-100">
+        <br />
+        <br />
+        <br />
 
-          <input
-            type="text"
-            placeholder="address to mint the NFT to"
-            onChange={(e) => setAddressToMintNFTto(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div>
+          <div
+            className="flex flex-col justify-center items-center bg-gray-100"
+            style={{ height: "85vh" }}
+          >
+            <div className="bg-white shadow-md rounded-lg p-8 w-[550px] mb-6">
+              <div>
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                  Contract_Address:
+                  <input
+                    className="grow"
+                    type="text"
+                    placeholder="address to mint the NFT to"
+                    onChange={(e) => setAddressToMintNFTto(e.target.value)}
+                  />
+                </label>
 
-          <input
-            type="text"
-            placeholder="NFT URI"
-            onChange={(e) => setNFTURI(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                  NFT_URI:
+                  <input
+                    className="grow"
+                    type="text"
+                    placeholder="http://nfturi.json"
+                    onChange={(e) => setNFTURI(e.target.value)}
+                  />
+                </label>
+              </div>
+              <br />
 
-          <button onClick={() => mintNFTs()}>Mint NFT</button>
+              <button
+                className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 font-bold text-xl"
+                onClick={() => mintNFTs()}
+              >
+                Mint NFT
+              </button>
+              <br />
+              <br />
+              {<div className="text-xl">{nftMintResponse}</div>}
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
         </div>
       </div>
     </div>
+
   );
 };
 

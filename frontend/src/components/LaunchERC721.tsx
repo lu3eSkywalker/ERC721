@@ -1,66 +1,109 @@
 import { ethers } from "ethers";
 import React, { useState } from "react";
 
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+
 const LaunchERC721 = () => {
   const [NFTName, setNFTName] = useState<string>("");
   const [NFTSymbol, setNFTSymbol] = useState<string>("");
+  const [erc721Created, setERC721Created] = useState<string>("");
 
-  const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL;
-  const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY;
   const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
   const ABI = ["function createERC721(string, string) public"];
 
-    async function createERC721() {
-      if (window.ethereum) {
-        try {
-          await window.ethereum.request({ method: "eth_requestAccounts" });
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await provider.getSigner();
-          const contract = new ethers.Contract(CONTRACT_ADDRESS || "", ABI, signer);
+  async function createERC721() {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(
+          CONTRACT_ADDRESS || "",
+          ABI,
+          signer
+        );
 
-          const createContract = await contract.createERC721(
-              NFTName,
-              NFTSymbol
-          );
+        const createContract = await contract.createERC721(NFTName, NFTSymbol);
 
-          const receipt = await createContract.wait();
-          console.log(receipt);
+        const receipt = await createContract.wait();
+        console.log(receipt);
 
-        } catch (error: any) {
-          console.error("Error launching token:", error);
-          alert(
-            "An error occurred while launching the token. Check console for details."
-          );
+        if (receipt.status == 1) {
+          setERC721Created("NFT created Successfully");
+        } else {
+          setERC721Created("Error creating NFTs");
         }
-      } else {
-        alert("Please install MetaMask to use this feature.");
+      } catch (error: any) {
+        console.error("Error launching ERC721:", error);
+        alert(
+          "An error occurred while launching ERC721. Check console for details."
+        );
       }
+    } else {
+      alert("Please install MetaMask to use this feature.");
     }
+  }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 w-80">
+    <div>
+      <div className="bg-gray-100">
+        <br />
+        <br />
+        <br />
+
         <div>
-          <input
-            type="text"
-            placeholder="NFT name"
-            onChange={(e) => setNFTName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div
+            className="flex flex-col justify-center items-center bg-gray-100"
+            style={{ height: "85vh" }}
+          >
+            <div className="bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
+              <div>
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                  NFT_Name
+                  <input
+                    type="text"
+                    className="grow"
+                    placeholder="MadLads"
+                    onChange={(e) => setNFTName(e.target.value)}
+                  />
+                </label>
 
-          <br />
+                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                  NFT_Symbol:
+                  <input
+                    type="text"
+                    className="grow"
+                    placeholder="MLADS"
+                    onChange={(e) => setNFTSymbol(e.target.value)}
+                  />
+                </label>
+              </div>
 
-          <input
-            type="text"
-            placeholder="NFT symbol"
-            onChange={(e) => setNFTSymbol(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+              <br />
+
+              <button
+                className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 font-bold text-xl"
+                onClick={() => createERC721()}
+              >
+                Initialize the contract
+              </button>
+
+              <br />
+              <br />
+              {<div className="text-xl">{erc721Created}</div>}
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
         </div>
-        <button onClick={() => createERC721()}>Initialize the contract</button>
-        <br></br>
-        <br></br>
       </div>
     </div>
   );

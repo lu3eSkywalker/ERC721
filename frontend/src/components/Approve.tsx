@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 
 const Approve = () => {
-  const [recepientAddress, setRecepientAddress] = useState<string>("0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
+  const [recepientAddress, setRecepientAddress] = useState<string>(
+    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+  );
   const [tokenId, setTokenId] = useState<number>();
-  const [nftContractAddress, setNFTContractAddress] = useState<string>("0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
+  const [nftContractAddress, setNFTContractAddress] = useState<string>(
+    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+  );
+
+  const [approvalResponse, setApprovalResponse] = useState<string>("");
 
   const ABI = ["function approve(address, uint256) public"];
 
@@ -24,10 +30,16 @@ const Approve = () => {
 
         const response = await approveUser.wait();
         console.log(response.toString());
+
+        if(response.status == 1) {
+          setApprovalResponse("Successfully Approved The Request") 
+        } else {
+          setApprovalResponse("Error Approving Request")
+        }
       } catch (error: any) {
-        console.error("Error launching token:", error);
+        console.error("Error approving nft:", error);
         alert(
-          "An error occurred while launching the token. Check console for details."
+          "An error occurred while approving the nft. Check console for details."
         );
       }
     } else {
@@ -36,37 +48,65 @@ const Approve = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 w-80">
+    <div>
+      <div className="bg-gray-100">
+        <br />
+        <br />
+        <br />
+
         <div>
-          <input
-            type="text"
-            placeholder="recepient address"
-            onChange={(e) => setRecepientAddress(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div
+            className="flex flex-col justify-center items-center bg-gray-100"
+            style={{ height: "85vh" }}
+          >
+            <div className="bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
+              <div>
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                  Address:
+                  <input
+                    className="grow"
+                    type="text"
+                    placeholder="recepient address"
+                    onChange={(e) => setRecepientAddress(e.target.value)}
+                  />
+                </label>
 
-          <br />
+                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                  Token_ID:
+                  <input
+                    className="grow"
+                    type="text"
+                    placeholder="token ID"
+                    onChange={(e) => setTokenId(parseInt(e.target.value))}
+                  />
+                </label>
 
-          <input
-            type="number"
-            placeholder="token ID"
-            onChange={(e) => setTokenId(parseInt(e.target.value))}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                  Address: 
+                  <input
+                    className="grow"
+                    type="text"
+                    placeholder="NFT contract address"
+                    onChange={(e) => setNFTContractAddress(e.target.value)}
+                  />
+                </label>
+              </div>
 
-          <br />
+              <br />
 
-          <input
-            type="number"
-            placeholder="NFT contract address"
-            onChange={(e) => setNFTContractAddress(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+              <button
+                className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 font-bold text-xl"
+                onClick={() => approveNFT()}
+              >
+                Initialize the contract
+              </button>
+
+              <br />
+              <br />
+              {<div className="text-xl">{approvalResponse}</div>}
+            </div>
+          </div>
         </div>
-        <button onClick={() => approveNFT()}>Initialize the contract</button>
-        <br></br>
-        <br></br>
       </div>
     </div>
   );
