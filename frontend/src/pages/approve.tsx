@@ -1,12 +1,16 @@
-import Approve from '@/components/Approve'
-import React from 'react'
+import Approve from "@/components/Approve";
+import Footer from "@/components/Design/Footer";
+import Navbar from "@/components/Design/Navbar";
+import React from "react";
 
 const approve = () => {
   return (
     <div>
-        <Approve />
+      <Navbar />
+      <Approve />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default approve
+export default approve;

@@ -68,11 +68,11 @@ const TransferTokens = () => {
         <div>
           <div
             className="flex flex-col justify-center items-center bg-gray-100"
-            style={{ height: "85vh" }}
+            style={{ height: "65vh" }}
           >
             <div className="bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
               <div>
-                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl my-2">
                   Address:
                   <input
                     className="grow"

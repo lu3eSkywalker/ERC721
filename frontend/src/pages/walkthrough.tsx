@@ -1,12 +1,14 @@
-import Walkthrough from '@/components/Walkthrough/Walkthrough'
-import React from 'react'
+import Navbar from "@/components/Design/Navbar";
+import Walkthrough from "@/components/Walkthrough/Walkthrough";
+import React from "react";
 
 const walkthrough = () => {
   return (
     <div>
-        <Walkthrough />
+      <Navbar />
+      <Walkthrough />
     </div>
-  )
-}
+  );
+};
 
-export default walkthrough
+export default walkthrough;

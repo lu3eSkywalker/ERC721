@@ -1,12 +1,16 @@
-import MintingNFTs from '@/components/MintingNFTs'
-import React from 'react'
+import Footer from "@/components/Design/Footer";
+import Navbar from "@/components/Design/Navbar";
+import MintingNFTs from "@/components/MintingNFTs";
+import React from "react";
 
 const mintnft = () => {
   return (
     <div>
-        <MintingNFTs />
+      <Navbar />
+      <MintingNFTs />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default mintnft
+export default mintnft;

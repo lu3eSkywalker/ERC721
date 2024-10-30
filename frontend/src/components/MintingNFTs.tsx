@@ -61,7 +61,7 @@ const MintingNFTs = () => {
         <div>
           <div
             className="flex flex-col justify-center items-center bg-gray-100"
-            style={{ height: "85vh" }}
+            style={{ height: "75vh" }}
           >
             <div className="bg-white shadow-md rounded-lg p-8 w-[550px] mb-6">
               <div>
