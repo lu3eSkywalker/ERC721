@@ -122,6 +122,36 @@ const TransferTokens = () => {
               <br />
               {<div className="text-xl">{nftTransferResponse}</div>}
             </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div className="text-center text-gray-700 font-medium">
+              <ul className="steps text-xl">
+                <li className="step step-primary">
+                  <a href="./launcherc721">Deploy ERC721 Contract</a>
+                </li>
+                <li className="step step-primary">
+                  <a href="./getcontractsbyuser">
+                    Get the ERC721 contract Address
+                  </a>
+                </li>
+                <li className="step step-primary">
+                  <a href="./mintnft">Mint the NFTs</a>
+                </li>
+                <li className="step step-primary">
+                  <a href="./approve">Approve NFTs (optional)</a>
+                </li>
+                <li className="step step-primary">
+                  <a href="./approveallnfts">Approve all NFTs (optional)</a>
+                </li>
+                <li className="step step-primary">
+                  <a href="./transfertoken">Transfer NFTs</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

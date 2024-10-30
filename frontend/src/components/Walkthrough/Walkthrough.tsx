@@ -22,14 +22,13 @@ const Walkthrough = () => {
           <div className="timeline-start mb-10 md:text-end">
             <time className="font-mono italic">Step 1</time>
             <div className="text-lg font-black">
-              <a href="./createliquiditypool">Deploy ERC721 Contract</a>
+              <a href="./launcherc721">Deploy ERC721 Contract</a>
             </div>
-            For creating a Liquidity Pool, we need the addresses of two tokens.
-            These tokens should be on the Ethereum network, and we need to own
-            them to create a liquidity pool of our own. We also need the
-            contract address of the Liquidity Pool Factory contract, but we have
-            hardcoded that address in the frontend. So, for now, there's no need
-            to add it manually.
+            In this process, we first deploy an ERC-721 contract to create a
+            unique NFT collection. During deployment, we specify the contract's
+            name and symbol, which serve as identifiers for the collection.
+            After the contract is successfully deployed, we can mint NFTs to
+            individual addresses, each token carrying unique metadata.
           </div>
           <hr />
         </li>
@@ -52,13 +51,12 @@ const Walkthrough = () => {
           <div className="timeline-end mb-10">
             <time className="font-mono italic">Step 2</time>
             <div className="text-lg font-black">
-              <a href="./liquiditypoolbyuser">
-                Get the ERC721 contract Address
-              </a>
+              <a href="./getcontractsbyuser">Get the ERC721 contract Address</a>
             </div>
-            To get the address of the liquidity pool, we can use the user public
-            address, to see the liquidity pool created by the user. We can also
-            see all the liquidity pools created by in our network.
+            To retrieve the ERC-721 contract address, we’ll use the user's
+            public key to identify any associated NFT contracts. By querying the
+            blockchain with the user's address, we can locate any deployed
+            ERC-721 contracts linked to that address.
           </div>
           <hr />
         </li>
@@ -81,15 +79,16 @@ const Walkthrough = () => {
           <div className="timeline-start mb-10 md:text-end">
             <time className="font-mono italic">Step 3</time>
             <div className="text-lg font-black">
-              <a href="./approvetokens">Mint the NFTs to the associated contract address</a>
+              <a href="./mintnft">
+                Mint the NFTs to the associated contract address
+              </a>
             </div>
-            In this step, we will approve our tokens for use by the liquidity
-            pool, a necessary action for enabling liquidity provisioning. Token
-            approval is a fundamental process in decentralized finance (DeFi),
-            where an asset holder grants another entity (in this case, the
-            liquidity pool) permission to spend a specified amount of tokens on
-            the holders behalf. This is done by setting a spending allowance for
-            the liquidity pool.
+            In this step, we’ll mint NFTs to the previously deployed contract
+            using the contract address and an NFT URI. The URI includes
+            essential metadata such as the NFT’s name, symbol, image, and
+            description. This information is stored off-chain and linked to the
+            NFT, defining its unique attributes. By minting, we add new tokens
+            to the collection, making them available for ownership and transfer.
           </div>
           <hr />
         </li>
@@ -112,11 +111,15 @@ const Walkthrough = () => {
           <div className="timeline-end mb-10">
             <time className="font-mono italic">Step 4 (Optional)</time>
             <div className="text-lg font-black">
-              <a href="./addliquidity">Approve NFT</a>
+              <a href="./approve">Approve NFT</a>
             </div>
-            In this, we would add liquidity to our liquidity pool by adding both
-            the token 0 and token 1 and would get the respective LPtoken back to
-            our account.
+            In this step, we enable NFT approvals, allowing a specified spender
+            to transfer the NFT on behalf of the owner. With this approval,
+            marketplaces gain permission to manage the NFT in escrow for
+            potential sale. This setup provides flexibility, as approved
+            platforms can list and sell the NFT while keeping it secure. This
+            feature streamlines transactions, making it easier to buy and sell
+            NFTs on marketplaces.
           </div>
           <hr />
         </li>
@@ -139,12 +142,12 @@ const Walkthrough = () => {
           <div className="timeline-start mb-10 md:text-end">
             <time className="font-mono italic">Step 5 (Optional)</time>
             <div className="text-lg font-black">
-              <a href="/removeliquidity">Approve All NFTs</a>
+              <a href="/approveallnfts">Approve All NFTs</a>
             </div>
-            For removing the liquidity, we would have to provide the LP tokens
-            that we got during adding the liquidity to the pool. After providing
-            the LP token, we would get our respective tokens, back in our
-            account.
+            In this step, we authorize all NFTs within a specific smart contract
+            for approval, allowing designated platforms to manage them
+            collectively. This is particularly useful for marketplaces or escrow
+            services, as it enables the bulk purchase or transfer of NFTs.
           </div>
           <hr />
         </li>
@@ -168,13 +171,12 @@ const Walkthrough = () => {
           <div className="timeline-end mb-10">
             <time className="font-mono italic">Step 6</time>
             <div className="text-lg font-black">
-              <a href="./addliquidity">Transfer NFTs</a>
+              <a href="./transfertoken">Transfer NFTs</a>
             </div>
-            You’ll need to specify three main values for a token swap: the token
-            you're swapping from (Token A), the token you wish to receive (Token
-            B), and the quantity of Token A you want to exchange. Based on the
-            pool’s current rates, you’ll receive a calculated amount of Token B
-            after the swap.
+            In this step, we transfer individual tokens directly to other users,
+            ensuring each NFT is moved separately. This process enables unique
+            asset ownership changes on a one-by-one basis. It’s ideal for
+            personal exchanges or gifting specific tokens to others.
           </div>
         </li>
       </ul>
