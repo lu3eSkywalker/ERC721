@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import GetContractsByUser from "./Walkthrough/GetContractsByUser";
 
 const GetContractByUser = () => {
   const [userAddress, setUserAddress] = useState<string>(
@@ -39,6 +40,9 @@ const GetContractByUser = () => {
         <br />
         <br />
         <br />
+        <div className="flex justify-center bg-gray-100">
+          <GetContractsByUser />
+        </div>
 
         <div>
           <div

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import TransferTokensInfo from "./Walkthrough/TransferTokensInfo";
 
 const TransferTokens = () => {
   const [senderAddress, setSenderAddress] = useState<string>(
@@ -60,6 +61,9 @@ const TransferTokens = () => {
         <br />
         <br />
         <br />
+        <div className="flex justify-center bg-gray-100">
+          <TransferTokensInfo />
+        </div>u
 
         <div>
           <div

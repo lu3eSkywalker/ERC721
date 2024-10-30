@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import MintingNFTsInfo from "./Walkthrough/MintingNFTsInfo";
 
 const MintingNFTs = () => {
   const [nftAddress, setNFTAddress] = useState<string>(
@@ -53,6 +54,9 @@ const MintingNFTs = () => {
         <br />
         <br />
         <br />
+        <div className="flex justify-center bg-gray-100">
+          <MintingNFTsInfo />
+        </div>
 
         <div>
           <div

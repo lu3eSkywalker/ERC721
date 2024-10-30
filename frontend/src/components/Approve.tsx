@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import ApproveInfo from "./Walkthrough/ApproveInfo";
 
 const Approve = () => {
   const [recepientAddress, setRecepientAddress] = useState<string>(
@@ -53,7 +54,9 @@ const Approve = () => {
         <br />
         <br />
         <br />
-
+        <div className="flex justify-center bg-gray-100">
+          <ApproveInfo />
+        </div>
         <div>
           <div
             className="flex flex-col justify-center items-center bg-gray-100"

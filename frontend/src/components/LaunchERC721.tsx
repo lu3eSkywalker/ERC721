@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import React, { useState } from "react";
+import LaunchERC721Info from "./Walkthrough/LaunchERC721Info";
 
 declare global {
   interface Window {
@@ -55,6 +56,9 @@ const LaunchERC721 = () => {
         <br />
         <br />
         <br />
+        <div className="flex justify-center bg-gray-100">
+          <LaunchERC721Info />
+        </div>
 
         <div>
           <div

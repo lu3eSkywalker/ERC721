@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import ApproveForAllNFTsOfContractInfo from './Walkthrough/ApproveForAllNFTsOfContractInfo';
 
 const ApprovalForAllNFTs = () => {
   const [recepientAddress, setRecepientAddress] = useState<string>(
@@ -55,6 +56,9 @@ const ApprovalForAllNFTs = () => {
         <br />
         <br />
         <br />
+        <div className="flex justify-center bg-gray-100">
+          <ApproveForAllNFTsOfContractInfo />
+        </div>
 
         <div>
           <div
