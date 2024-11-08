@@ -65,7 +65,14 @@ contract ERC721 {
     }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public {
-        require(ownerOf(_tokenId) == msg.sender, "!Auth");
+        address owner = ownerOf(_tokenId);
+        // Checking that the caller is the owner, the approved address for the token, or an operator for the owner
+        require(
+            msg.sender == owner ||
+                _tokenApprovals[_tokenId] == msg.sender ||
+                _operatorApprovals[owner][msg.sender],
+            "!Auth"
+        );
         _transfer(_from, _to, _tokenId);
     }
 
