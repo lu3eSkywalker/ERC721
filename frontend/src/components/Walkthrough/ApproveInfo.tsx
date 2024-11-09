@@ -22,7 +22,7 @@ const ApproveInfo = () => {
             <div className="py-4 text-xl">
               <p>
                 In this step, we enable NFT approvals to allow a designated
-                spender to transfer the NFT on the owner's behalf.
+                spender to transfer the NFT on the owners behalf.
               </p>
               <br />
               <p>

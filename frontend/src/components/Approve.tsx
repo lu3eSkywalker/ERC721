@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
 import ApproveInfo from "./Walkthrough/ApproveInfo";
+import Image from "next/image";
+import asset1 from "../assets/asset1.png";
+import asset2 from "../assets/asset2.jpeg";
+import asset4 from "../assets/asset4.jpg";
+import boredApe from "../assets/boredApe.jpg";
+import pattern_randomized from "../assets/pattern-randomized.svg"
 
 const Approve = () => {
   const [recepientAddress, setRecepientAddress] = useState<string>(
@@ -37,7 +43,7 @@ const Approve = () => {
         } else {
           setApprovalResponse("Error Approving Request");
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error("Error approving nft:", error);
         alert(
           "An error occurred while approving the nft. Check console for details."
@@ -49,22 +55,63 @@ const Approve = () => {
   }
 
   return (
-    <div>
-      <div className="bg-gray-100">
-        <br />
-        <br />
-        <br />
-        <div className="flex justify-center bg-gray-100">
-          <ApproveInfo />
+    <div
+      className="bg-container"
+      style={{
+        backgroundImage: `url(${pattern_randomized.src})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        minHeight: "90vh",
+      }}
+    >
+      <div>
+        <div>
+          <div className="flex justify-between items-center">
+            <div className="flex justify-end">
+              <Image
+                src={asset2}
+                alt="Description of the image"
+                width={290}
+              />
+            </div>
+
+            <div className="flex justify-center flex-grow ml-[200px]">
+              <ApproveInfo />
+            </div>
+
+            <div className="flex justify-start">
+              <Image
+                src={asset1}
+                alt="Description of the image"
+                width={500}
+                height={300}
+              />
+            </div>
+          </div>
         </div>
+
+        <div className="absolute left-0" style={{ marginTop: "1px" }}>
+          <Image src={asset4} alt="Ethereum Logo" width={400} height={200} />
+        </div>
+
+        <div
+          className="absolute right-0 rounded-full mx-[80px]"
+          style={{ marginTop: "80px" }}
+        >
+          <Image src={boredApe} alt="cryptoPunks" width={400} height={200} />
+        </div>
+
+        <div className="flex justify-center"></div>
         <div>
           <div
-            className="flex flex-col justify-center items-center bg-gray-100"
-            style={{ height: "75vh" }}
+            className="flex flex-col justify-center items-center"
+            style={{ height: "45vh" }}
           >
-            <div className="bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
+            <div className="absolute w-[600px] h-[420px] bg-blue-500 rounded-lg transform -rotate-6 opacity-50 my-[500px] top-[-50px]"></div>
+
+            <div className="relative bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
               <div>
-                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl border-4">
                   Address:
                   <input
                     className="grow"
@@ -74,7 +121,7 @@ const Approve = () => {
                   />
                 </label>
 
-                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 my-4 font-black text-xl border-4">
                   Token_ID:
                   <input
                     className="grow"
@@ -84,7 +131,7 @@ const Approve = () => {
                   />
                 </label>
 
-                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl border-4">
                   Address:
                   <input
                     className="grow"
@@ -104,8 +151,6 @@ const Approve = () => {
                 Initialize the contract
               </button>
 
-              <br />
-              <br />
               {<div className="text-xl">{approvalResponse}</div>}
             </div>
 
@@ -113,6 +158,10 @@ const Approve = () => {
             <br />
             <br />
             <br />
+            <br />
+            <br />
+            <br />
+
 
             <div className="text-center text-gray-700 font-medium">
               <ul className="steps text-xl">

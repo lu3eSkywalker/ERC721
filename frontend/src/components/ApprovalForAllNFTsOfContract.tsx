@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
-import ApproveForAllNFTsOfContractInfo from './Walkthrough/ApproveForAllNFTsOfContractInfo';
+import ApproveForAllNFTsOfContractInfo from "./Walkthrough/ApproveForAllNFTsOfContractInfo";
+import Image from "next/image";
+import asset1 from "../assets/asset1.png";
+import asset2 from "../assets/asset2.jpeg";
+import asset4 from "../assets/asset4.jpg";
+import cryptoKitties from "../assets/cryptoKitties.jpg";
+import pattern_randomized from "../assets/pattern-randomized.svg"
+
 
 const ApprovalForAllNFTs = () => {
   const [recepientAddress, setRecepientAddress] = useState<string>(
@@ -39,7 +46,7 @@ const ApprovalForAllNFTs = () => {
         } else {
           setApprovalResponse("Error Approving The Request");
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error("Error Approving NFTs:", error);
         alert(
           "An error occurred while approving the nfts. Check console for details."
@@ -51,23 +58,61 @@ const ApprovalForAllNFTs = () => {
   }
 
   return (
-    <div>
-      <div className="bg-gray-100">
-        <br />
-        <br />
-        <br />
-        <div className="flex justify-center bg-gray-100">
-          <ApproveForAllNFTsOfContractInfo />
+    <div
+      className="bg-container"
+      style={{
+        backgroundImage: `url(${pattern_randomized.src})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        minHeight: "90vh",
+      }}
+    >
+      <div>
+        <div>
+          <div className="flex justify-between items-center">
+            <div className="flex justify-end">
+              <Image src={asset2} alt="Description of the image" width={290} />
+            </div>
+
+            <div className="flex justify-center flex-grow ml-[200px]">
+              <ApproveForAllNFTsOfContractInfo />
+            </div>
+
+            <div className="flex justify-start">
+              <Image
+                src={asset1}
+                alt="Description of the image"
+                width={500}
+                height={300}
+              />
+            </div>
+          </div>
         </div>
+
+        <div className="absolute left-0" style={{ marginTop: "1px" }}>
+          <Image src={asset4} alt="Ethereum Logo" width={400} height={200} />
+        </div>
+
+        <div
+          className="absolute right-0 rounded-full mx-[80px]"
+          style={{ marginTop: "35px" }}
+        >
+          <Image src={cryptoKitties} alt="cryptoKitties" width={300} height={150} />
+        </div>
+
+
+        <div className="flex justify-center"></div>
 
         <div>
           <div
-            className="flex flex-col justify-center items-center bg-gray-100"
-            style={{ height: "75vh" }}
+            className="flex flex-col justify-center items-center"
+            style={{ height: "40vh" }}
           >
-            <div className="bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
+            <div className="absolute w-[500px] h-[350px] bg-blue-500 rounded-lg transform -rotate-6 opacity-50 my-[500px] top-[-20px]"></div>
+
+            <div className="relative bg-white shadow-md rounded-lg p-8 w-[450px] mb-6">
               <div>
-                <label className="input input-bordered flex items-center gap-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 font-black text-xl border-4">
                   Address:
                   <input
                     className="grow"
@@ -77,7 +122,7 @@ const ApprovalForAllNFTs = () => {
                   />
                 </label>
 
-                <label className="input input-bordered flex items-center gap-2 my-2 font-black text-xl">
+                <label className="input input-bordered flex items-center gap-2 my-4 font-black text-xl border-4">
                   Address:
                   <input
                     className="grow"
@@ -87,8 +132,6 @@ const ApprovalForAllNFTs = () => {
                   />
                 </label>
               </div>
-
-              <br />
 
               <button
                 className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 font-bold text-xl"
@@ -105,6 +148,8 @@ const ApprovalForAllNFTs = () => {
               {<div className="text-xl">{approvalResponse}</div>}
             </div>
 
+            <br />
+            <br />
             <br />
             <br />
             <br />

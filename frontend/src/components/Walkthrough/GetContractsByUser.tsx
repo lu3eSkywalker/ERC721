@@ -22,14 +22,14 @@ const GetContractsByUser = () => {
             <h3 className="font-bold text-lg">Retrieve NFT Contract Address</h3>
             <div className="py-4 text-xl">
               <p>
-                To retrieve an ERC-721 contract address, we use the user's
+                To retrieve an ERC-721 contract address, we use the users
                 public key to identify any associated NFT contracts.
               </p>
               <br />
               <p>
                 By querying the blockchain with this address, we can locate any
-                deployed ERC-721 contracts that are linked to the user's wallet.
-                This approach helps us discover and interact with the user’s
+                deployed ERC-721 contracts that are linked to the users wallet.
+                This approach helps us discover and interact with the users
                 unique NFT collections.
               </p>
             </div>
