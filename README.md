@@ -1,4 +1,19 @@
-# ERC721
+# ERC721 NFT Factory on Sepolia Testnet
+Technologies Used:
+Next.js
+React
+Ether.js
+Solidity
+
+This project demonstrates the interaction between a frontend application and a smart contract deployed on the Sepolia testnet. The primary goal is to showcase how a web application can interact with smart contracts, enabling the creation of custom NFTs.
+
+Features
+Smart Contract Functionalities:
+Deploy ERC721 Contract:  Deploy custom ERC721 NFT contracts through the factory.
+Mint NFTs: Mint new NFTs with unique identifiers and metadata.
+Transfer NFTs: Transfer ownership of NFTs to other addresses.
+Approve Transfer on Your Behalf: Grant approval to others to transfer your NFTs on your behalf.
+
 
 
 # HomePage
