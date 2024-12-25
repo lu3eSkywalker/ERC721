@@ -102,6 +102,7 @@ contract ERC721 {
     }
 
     function setApprovalForAll(address _operator, bool _approved) public {
+        require(msg.sender == contractOwner, 'Only Owner can send call this function');
         _operatorApprovals[msg.sender][_operator] = _approved;
         emit ApprovalForAll(msg.sender, _operator, _approved);
     }
