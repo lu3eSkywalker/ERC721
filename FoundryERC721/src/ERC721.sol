@@ -56,12 +56,18 @@ contract ERC721 {
     }
 
     function mintTo(address _to, string memory _uri) public {
+        require(msg.sender == contractOwner, "Only Contract Owner can call this function");
         require(_to != address(0), "!ToAdd0");
         _owners[nextTokenIdToMint] = _to;
         _balances[_to] += 1;
         _tokenUris[nextTokenIdToMint] = _uri;
         emit Transfer(address(0), _to, nextTokenIdToMint);
         nextTokenIdToMint += 1;
+    }
+
+    function transferFunction(address _from, address _to, uint256 _tokenId) public {
+        require(ownerOf(_tokenId) == msg.sender, "Caller is not NFT Owner");
+        _transfer(_from, _to, _tokenId);
     }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public {
